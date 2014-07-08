@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red211\green24\blue149;\red0\green160\blue255;\red255\green44\blue56;
+}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab674
+\pard\tx674\pardeftab674\pardirnatural
+
+\f0\fs28 \cf1 \CocoaLigature0 - (\cf2 IBAction\cf1 )LoadAudio:(\cf2 id\cf1 )sender\{\
+    \cf3 MPMediaPickerController\cf1  *mediaPicker = [[\cf3 MPMediaPickerController\cf1  \cf3 alloc\cf1 ] \cf3 initWithMediaTypes\cf1 : \cf3 MPMediaTypeAny\cf1 ];\
+    mediaPicker.\cf3 delegate\cf1  = \cf2 self\cf1 ;\
+    mediaPicker.\cf3 prompt\cf1  = \cf4 @"Select Audio"\cf1 ;\
+    [\cf2 self\cf1  \cf3 presentModalViewController\cf1 :mediaPicker \cf3 animated\cf1 :\cf2 YES\cf1 ];\
+\}\
+\
+\
+- (\cf2 void\cf1 ) mediaPicker: (\cf3 MPMediaPickerController\cf1  *) mediaPicker\
+   didPickMediaItems: (\cf3 MPMediaItemCollection\cf1  *) collection \{\
+    \
+    \
+\
+    \
+    [\cf2 self\cf1  \cf3 dismissViewControllerAnimated\cf1 :\cf2 YES\cf1  \cf3 completion\cf1 :\cf2 nil\cf1 ];\
+    \cf3 NSURL\cf1 * assetUrl = [collection.\cf3 representativeItem\cf1 \
+                       \cf3 valueForProperty\cf1 :\cf3 MPMediaItemPropertyAssetURL\cf1 ];\
+    \cf3 AVURLAsset\cf1 * asset = [\cf3 AVURLAsset\cf1  \cf3 URLAssetWithURL\cf1 :assetUrl \cf3 options\cf1 :\cf2 nil\cf1 ];\
+    \cf3 AVPlayerItem\cf1 * playerItem = [\cf3 AVPlayerItem\cf1  \cf3 playerItemWithAsset\cf1 :asset];\
+    \cf3 NSLog\cf1 (\cf4 @"Asset url: %@"\cf1 ,assetUrl);\
+    \cf3 AVPlayer\cf1  * myPlayer = [\cf3 AVPlayer\cf1  \cf3 playerWithPlayerItem\cf1 :playerItem];\
+    [myPlayer \cf3 play\cf1 ];\
+    \
+\}\
+\
+\
+\
+- (\cf2 void\cf1 ) mediaPickerDidCancel: (\cf3 MPMediaPickerController\cf1  *) mediaPicker\
+\{\
+    [\cf2 self\cf1  \cf3 dismissModalViewControllerAnimated\cf1 : \cf2 YES\cf1 ];\
+\}}
